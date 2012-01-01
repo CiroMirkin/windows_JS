@@ -1,8 +1,14 @@
 "use strict"
 
+const moveWindowStyles = (window) => {
+    window.classList.add('window--defaultSize')
+    window.classList.remove('window--max')
+    console.log(window)
+    return window
+}
+
 const moveWindow = ({ window, event }) => {
-    window.style.position = 'absolute'
-    window.style.zIndex = 1000
+    window = moveWindowStyles(window)
     let shiftX = event.clientX - window.getBoundingClientRect().left;
     let shiftY = event.clientY - window.getBoundingClientRect().top
 
@@ -54,9 +60,15 @@ const closeWindow = (window) => {
     })
 }
 
+const maxWindow = (window) => {
+    window.classList.toggle('window--defaultSize')
+    window.classList.toggle('window--max')
+}
+
 const btnAction = (btn) => {
     const btnActions = {
-        'close': (window) => closeWindow(window)
+        'close': (window) => closeWindow(window),
+        'max': (window) => maxWindow(window)
     }
 
     Object.entries(btnActions).forEach(([btnActionClass, btnAction]) => {
