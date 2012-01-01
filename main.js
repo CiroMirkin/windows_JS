@@ -3,7 +3,8 @@
 const moveWindowStyles = (window) => {
     window.classList.add('window--defaultSize')
     window.classList.remove('window--max')
-    console.log(window)
+    window.style.cursor = 'grabbing'
+
     return window
 }
 
@@ -27,6 +28,7 @@ const moveWindow = ({ window, event }) => {
     window.onmouseup = function () {
         document.removeEventListener('mousemove', onMouseMove)
         window.onmouseup = null
+        window.style.cursor = 'default'
     }
 }
 
