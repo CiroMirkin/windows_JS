@@ -14,8 +14,12 @@ body {
 	resize: both;
 	overflow:hidden;
 	border: 2px solid #000;
+	background: #fff;
 	border-radius: 3px;
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode';
+}
+.window--hidden {
+	display: none;
 }
 .window__header {
 	height: 26px;
@@ -51,4 +55,5 @@ body {
 	display: grid;
 	place-items: center;
 	border: 1.5px solid #000;
+	background: #fff;
 }

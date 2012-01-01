@@ -36,3 +36,40 @@ body.addEventListener('mousedown', (event) => {
         moveWindow({ window, event})
     }
 })
+
+const closeWindow = (window) => {
+    window.classList.add('window--hidden')
+    let actualChildNode = 0
+
+    body.childNodes.forEach(windowInBody => {
+        if(`${windowInBody}` == '[object HTMLDivElement]'){
+            const windowClassList = windowInBody.classList.value.split(' ')
+            const isThisWindowHidden = !!(windowClassList.filter(windowClass => windowClass == 'window--hidden').at(0))
+            
+            if(isThisWindowHidden) {
+                body.childNodes.item(actualChildNode).remove()
+            }
+        }
+        actualChildNode++
+    })
+}
+
+const btnAction = (btn) => {
+    const btnActions = {
+        'close': (window) => closeWindow(window)
+    }
+
+    Object.entries(btnActions).forEach(([btnActionClass, btnAction]) => {
+        const btnClass = btn.classList.value.split(' ').filter(btnClass => btnClass == btnActionClass).at(0)
+        if(!!btnClass) {
+            const window = btn.parentElement.parentElement.parentElement
+            btnAction(window)
+        }
+    });
+}
+
+body.addEventListener('click', (e) => {
+    if(e.target.classList[0] == 'actions__action') {
+        btnAction(e.target)
+    }
+})
